@@ -1,2 +1,21 @@
-div
-    h2 Crea tu cuenta
+extends ../layout/index
+block contenido
+    div(class="py-10")
+        h1(class="text-4xl my-10 font-extrabold text-center") BienesRaíces 
+            span(class="font-normal") Pipo
+        h2.text-center.text-2xl.font-extrabold Registrate
+        div(class="mt-8 mx-auto max-w-md")
+            div(class="bg-white py-8 px-4 shadow")
+                form(class="space-y-5")
+                    div
+                        label(class="block text-sm uppercase text-gray-600 mb-2 font-bold" for="nombre") Tu nombre
+                        input(type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" placeholder="Tu nombre" name="nombre")#nombre
+                    div
+                        label(class="block text-sm uppercase text-gray-600 mb-2 font-bold" for="email") Tu correo electrónico
+                        input(type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" placeholder="Tu correo electrónico" name="email")#email
+                    div
+                        label(class="block text-sm uppercase text-gray-600 mb-2 font-bold" for="password") Tu contraseña
+                        input(type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" placeholder="Tu contraseña" name="password")#password
+                    div
+                        label(class="block text-sm uppercase text-gray-600 mb-2 font-bold" for="repetir_password") Repetir contraseña
+                        input(type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" placeholder="Repetir contraseña" name="repetir_password")#repetir_password
