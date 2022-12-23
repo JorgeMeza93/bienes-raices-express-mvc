@@ -1,0 +1,27 @@
+{
+  "name": "bienes-raices-node",
+  "version": "1.0.0",
+  "description": "Proyecto utilizando Express y JS",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js",
+    "server": "nodemon index.js"
+  },
+  "keywords": [
+    "Express",
+    "Node",
+    "MySQL",
+    "pug"
+  ],
+  "author": "Jorge Meza Bello",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "pug": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
