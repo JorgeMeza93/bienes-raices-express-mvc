@@ -1,5 +1,5 @@
 import express from "express";
-import routes from "./routes/routes.js"
+import router from "./routes/routes.js"
 
 const app = express();
 const port = 3000;
@@ -8,8 +8,11 @@ const port = 3000;
 app.set("view engine", "pug");
 app.set("views", "./views");
 
+//Carpeta publica
+app.use( express.static("public") )
+
 //Routing
-app.use("/auth", routes);
+app.use("/auth", router);
 
 app.listen(port, () =>{
     console.log(`Servidor corriendo en el puerto ${port}`)
