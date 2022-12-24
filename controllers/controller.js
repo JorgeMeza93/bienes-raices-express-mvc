@@ -9,5 +9,10 @@ const formularioRegistro = (req, res) => {
         pagina: "Crea tu cuenta"
     })
 }
+const formularioOlvidePassword = (req, res) => {
+    res.render("auth/olvide", {
+        pagina: "Olvidé password"
+    })
+}
 
-export { formularioLogin, formularioRegistro }
+export { formularioLogin, formularioRegistro, formularioOlvidePassword }
