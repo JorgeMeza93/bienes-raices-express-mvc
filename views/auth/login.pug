@@ -13,4 +13,7 @@ block contenido
                     div
                         label(class="block text-sm uppercase text-gray-600 mb-2 font-bold" for="password") Tu contraseña
                         input(type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" placeholder="Tu contraseña" name="password")#password
+                    div(class="flex items-center justify-between")
+                        a(class="text-gray-500 text-xs" href="/auth/registro") ¿No tienes cuenta? Crea una
+                        a(class="text-gray-500 text-xs" href="/auth/olvide-password") ¿Olvidaste tu password?
                     input(class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 cursor-pointer" type="submit" value="Inicia Sesión")
