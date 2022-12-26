@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
 
+dotenv.config({ path: ".env" })
 const db = new Sequelize(process.env.BD_Nombre, process.env.BD_User, process.env.BD_Password, {
     host: process.env.BD_Host,
     port: 3306,

@@ -19,6 +19,7 @@
   "author": "Jorge Meza Bello",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mysql2": "^2.3.3",
     "pug": "^3.0.2",

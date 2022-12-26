@@ -1,3 +1,4 @@
+import Usuario from "../models/Usuario.js"
 
 const formularioLogin = (req, res) => {
     res.render("auth/login", {
@@ -15,4 +16,9 @@ const formularioOlvidePassword = (req, res) => {
     })
 }
 
-export { formularioLogin, formularioRegistro, formularioOlvidePassword }
+const registrarUsuario = async (req, res) => {
+    const usuario = await Usuario.create( req.body );
+    res.json(usuario)
+}
+
+export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario }
