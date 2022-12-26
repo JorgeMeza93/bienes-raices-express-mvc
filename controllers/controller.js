@@ -38,7 +38,21 @@ const registrarUsuario = async (req, res) => {
             }
         })
     }
-
+    //Verificar que el usuario no esté duplicado
+    const yaExiste = await Usuario.findOne({ where: {email: req.body.email } })
+    if(yaExiste){
+        console.log("Ya Existe");
+        return res.render("auth/registro", {
+            pagina: "Crear Cuenta",
+            errores: [{ msg: "El usuario ya está registrado" }],
+            usuario: {
+                nombre: req.body.nombre,
+                apellido: req.body.apellido,
+                email: req.body.email
+            }
+        })
+    }
+    return;
     const usuario = await Usuario.create( req.body );
     res.json(usuario)
 }
