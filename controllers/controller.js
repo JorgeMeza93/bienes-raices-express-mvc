@@ -1,5 +1,6 @@
 import Usuario from "../models/Usuario.js";
-import { check, validationResult } from "express-validator"
+import { check, validationResult } from "express-validator";
+import { generarID } from "../helpers/token.js";
 
 const formularioLogin = (req, res) => {
     res.render("auth/login", {
@@ -58,8 +59,12 @@ const registrarUsuario = async (req, res) => {
         apellido: req.body.apellido,
         email: req.body.email,
         password: req.body.password,
-        token: 123
+        token: generarID()
     });
+    res.render("templates/mensaje", {
+        pagina: "Cuenta Creada Correctamente",
+        mensaje: "Hemos enviado un email de confirmación presiona en el enlace"
+    })
 }
 
 export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario }
