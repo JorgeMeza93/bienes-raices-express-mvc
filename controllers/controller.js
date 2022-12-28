@@ -75,9 +75,23 @@ const registrarUsuario = async (req, res) => {
     })
 }
 
-const confirmar = (req, res) => {
+const confirmar = async (req, res) => {
     const { token } = req.params;
-    console.log("Comprobando");
+    const usuario = await Usuario.findOne({where: { token }});
+    if(!usuario){
+        return res.render("auth/confirmar-cuenta", {
+            pagina: "Error al confirmar tu cuenta",
+            mensaje: "Ha habido un error al confirmar tu cuenta. Intenta nuevamente",
+            error: true
+        })
+    }
+    usuario.token = null;
+    usuario.confirmado = true;
+    await usuario.save();
+    res.render("auth/confirmar-cuenta", {
+        pagina: "Cuenta confirmada",
+        mensaje: "La cuenta se confirmo correctamente"
+    })
 }
 
 export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario, confirmar }
