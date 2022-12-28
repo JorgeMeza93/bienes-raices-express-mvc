@@ -52,9 +52,14 @@ const registrarUsuario = async (req, res) => {
             }
         })
     }
-    return;
-    const usuario = await Usuario.create( req.body );
-    res.json(usuario)
+    //Almacenar un usuario
+    await Usuario.create({
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        email: req.body.email,
+        password: req.body.password,
+        token: 123
+    });
 }
 
 export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario }
