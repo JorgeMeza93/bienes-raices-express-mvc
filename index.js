@@ -1,6 +1,8 @@
 import express from "express";
 import router from "./routes/routes.js"
 import db from "./config/db.js";
+import csurf from "csurf";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,6 +18,10 @@ try {
 
 //Habilitar lectura de datos desde el request
 app.use( express.urlencoded({ extended: true }) )
+
+//Habilitar Cookie Parser y csurf
+app.use( cookieParser() );
+app.use( csurf({ cookie: true }) )
 
 //Habilitar el temple engine
 app.set("view engine", "pug");

@@ -10,7 +10,8 @@ const formularioLogin = (req, res) => {
 }
 const formularioRegistro = (req, res) => {
     res.render("auth/registro", {
-        pagina: "Crea tu cuenta"
+        pagina: "Crea tu cuenta",
+        csrfToken: req.csrfToken()
     })
 }
 const formularioOlvidePassword = (req, res) => {
@@ -28,10 +29,9 @@ const registrarUsuario = async (req, res) => {
     await check("repetir_password").equals(req.body.password).withMessage("Los passwords no son iguales").run(req);
     let resultado = validationResult(req);
     if(!resultado.isEmpty()){
-        console.log(req.body.password);
-        console.log(req.body.repetir_password);
         return res.render("auth/registro", {
             pagina: "Crear Cuenta",
+            csrfToken: req.csrfToken(),
             errores: resultado.array(),
             usuario: {
                 nombre: req.body.nombre,
@@ -46,6 +46,7 @@ const registrarUsuario = async (req, res) => {
         console.log("Ya Existe");
         return res.render("auth/registro", {
             pagina: "Crear Cuenta",
+            csrfToken: req.csrfToken(),
             errores: [{ msg: "El usuario ya está registrado" }],
             usuario: {
                 nombre: req.body.nombre,
