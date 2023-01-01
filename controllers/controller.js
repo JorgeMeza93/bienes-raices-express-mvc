@@ -1,7 +1,7 @@
 import Usuario from "../models/Usuario.js";
 import { check, validationResult } from "express-validator";
 import { generarID } from "../helpers/token.js";
-import { emailRegistro } from "../helpers/emails.js";
+import { emailOlvidePassword, emailRegistro } from "../helpers/emails.js";
 
 const formularioLogin = (req, res) => {
     res.render("auth/login", {
@@ -16,7 +16,8 @@ const formularioRegistro = (req, res) => {
 }
 const formularioOlvidePassword = (req, res) => {
     res.render("auth/olvide", {
-        pagina: "Olvidé password"
+        pagina: "Olvidé password",
+        csrfToken: req.csrfToken()
     })
 }
 
@@ -95,4 +96,47 @@ const confirmar = async (req, res) => {
     })
 }
 
-export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario, confirmar }
+const resetPassword = async (req, res) => {
+    await check("email").isEmail().withMessage("El email debe ser un formato válido").run(req);
+    let resultado = validationResult(req);
+    if(!resultado.isEmpty()){
+        return res.render("auth/olvide", {
+            pagina: "Olvide password",
+            csrfToken: req.csrfToken(),
+            errores: resultado.array()
+        })
+    }
+    const { email } = req.body;
+    const usuario = await Usuario.findOne({ where: { email } });
+    if(!usuario){
+        return res.render("auth/olvide", {
+            pagina: "Olvide password",
+            csrfToken: req.csrfToken(),
+            errores: [{msg: "El email no pertence a ningun usuario"}]
+        })
+    }
+    usuario.token = generarID();
+    await usuario.save();
+    emailOlvidePassword({
+        email: usuario.email,
+        nombre: usuario.nombre,
+        token: usuario.token
+    });
+    res.render("templates/mensaje", {
+        pagina: "Restablece tu password",
+        mensaje: "Hemos enviado un email con las instrucciones"
+    })
+ 
+}
+
+const comprobarToken = async (req, res) => {
+    const { token } = req.params;
+    const usuario = await Usuario.findOne({ where: { token } });
+    console.log(usuario)
+}
+
+const nuevoPassword = (req, res) => {
+
+}
+
+export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario, confirmar, resetPassword, comprobarToken, nuevoPassword }
