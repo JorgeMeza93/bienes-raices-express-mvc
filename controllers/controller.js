@@ -6,9 +6,32 @@ import bcrypt from "bcrypt";
 
 const formularioLogin = (req, res) => {
     res.render("auth/login", {
-        pagina: "Accede a tu cuenta"
+        pagina: "Accede a tu cuenta",
+        csrfToken: req.csrfToken()
     })
 }
+const autenticarLogin = async (req, res) => {
+    await check("email").isEmail().withMessage("No tiene el formato válido de email").run(req);
+    await check("password").notEmpty().withMessage("El password es requerido").run(req);
+    let resultado = validationResult(req);
+    if(!resultado.isEmpty()){
+        return res. render("auth/login", {
+            pagina: "Intenta nuevamente",
+            csrfToken: req.csrfToken(),
+            errores: resultado.array()
+        })
+    }
+    const { email, password } = req.body;
+    const usuario = await Usuario.findOne({ where: {email} });
+    if(!usuario){
+        return res.render("auth/login", {
+            pagina: "Inicia Sesión",
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: "El usuario no existe" }]
+        })
+    }
+}
+
 const formularioRegistro = (req, res) => {
     res.render("auth/registro", {
         pagina: "Crea tu cuenta",
@@ -171,4 +194,6 @@ const nuevoPassword = async (req, res) => {
     })
 }
 
-export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario, confirmar, resetPassword, comprobarToken, nuevoPassword }
+
+
+export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario, confirmar, resetPassword, comprobarToken, nuevoPassword, autenticarLogin }
