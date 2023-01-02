@@ -45,12 +45,16 @@ const autenticarLogin = async (req, res) => {
             errores: [{ msg: "El password es incorrecto" }]
         })
     }
-    // Autenticar al usuario
+    // Autenticar al usuario y generar jwt
    const token = generarJWT( { 
         id: usuario.id,
         nombre: usuario.nombre
     });
-   
+
+    return res.cookie("_token", token, {
+        httpOnly: true,  // <-- Evita ataque csrf evita que este cookie sea accesible desde una api javascript (terminal)
+        // secure: true   <-- Habilitar si tenemos en el hosting un certificado de ssl
+    }).redirect("/mis-propiedades")
 }
 
 const formularioRegistro = (req, res) => {
