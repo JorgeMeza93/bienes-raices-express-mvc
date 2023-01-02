@@ -1,8 +1,9 @@
 import Usuario from "../models/Usuario.js";
 import { check, validationResult } from "express-validator";
-import { generarID } from "../helpers/token.js";
+import { generarID, generarJWT } from "../helpers/token.js";
 import { emailOlvidePassword, emailRegistro } from "../helpers/emails.js";
 import bcrypt from "bcrypt";
+
 
 const formularioLogin = (req, res) => {
     res.render("auth/login", {
@@ -30,6 +31,26 @@ const autenticarLogin = async (req, res) => {
             errores: [{ msg: "El usuario no existe" }]
         })
     }
+    if(! usuario.confirmado){
+        return res.render("auth/login", {
+            pagina: "Inicia Sesión",
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: "Tu cuenta no ha sido confirmada"}]
+        })
+    }
+    if(usuario.verificarPassword(password)){
+        return res.render("auth/login", {
+            pagina: "Inicia Sesión",
+            csrfToken: req.csrfToken(),
+            errores: [{ msg: "El password es incorrecto" }]
+        })
+    }
+    // Autenticar al usuario
+   const token = generarJWT( { 
+        id: usuario.id,
+        nombre: usuario.nombre
+    });
+   
 }
 
 const formularioRegistro = (req, res) => {
