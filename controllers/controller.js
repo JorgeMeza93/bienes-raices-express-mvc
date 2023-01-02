@@ -2,6 +2,7 @@ import Usuario from "../models/Usuario.js";
 import { check, validationResult } from "express-validator";
 import { generarID } from "../helpers/token.js";
 import { emailOlvidePassword, emailRegistro } from "../helpers/emails.js";
+import bcrypt from "bcrypt";
 
 const formularioLogin = (req, res) => {
     res.render("auth/login", {
@@ -134,15 +135,40 @@ const comprobarToken = async (req, res) => {
     const usuario = await Usuario.findOne({ where: { token } });
     if(!usuario){
         return res.render("auth/confirmar-cuenta", {
-            pagina: "Reestablece tu password",
+            pagina: "Restablece tu password",
             mensaje: "Ha habido un error al validar tu información, intenta nuevamente",
             error: true
         })
     }
+    res.render("auth/restablece-password", {
+        pagina: "Restablece tu password",
+        mensaje: "",
+        csrfToken: req.csrfToken()
+    })
 }
 
-const nuevoPassword = (req, res) => {
-
+const nuevoPassword = async (req, res) => {
+    await check("password").isLength({ min: 8}).withMessage("El password debe ser de entre 8 y 24 caracteres").run(req);
+    let resultado = validationResult(req);
+    if(!resultado.isEmpty()){
+        return res.render("auth/restablece-password", {
+            pagina: "Restablece tu password",
+            csrfToken: req.csrfToken(),
+            errores: resultado.array()
+        })
+    }
+    const { token } = req.params;
+    const { password } = req.body;
+    const usuario = await Usuario.findOne({ where: { token }});
+    //Restablecer password
+    const salt = await bcrypt.genSalt(10);
+    usuario.password = await bcrypt.hash( password, salt);
+    usuario.token = null;
+    await usuario.save();
+    res.render("auth/confirmar-cuenta", {
+        pagina: "Password Restablecido",
+        mensaje: "El password se ha guardado correctamente"
+    })
 }
 
 export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario, confirmar, resetPassword, comprobarToken, nuevoPassword }
