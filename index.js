@@ -1,5 +1,6 @@
 import express from "express";
-import router from "./routes/routes.js"
+import router from "./routes/routes.js";
+import routerPropiedades from "./routes/propiedades-routes.js";
 import db from "./config/db.js";
 import csurf from "csurf";
 import cookieParser from "cookie-parser";
@@ -32,6 +33,7 @@ app.use( express.static("public") )
 
 //Routing
 app.use("/auth", router);
+app.use("/",routerPropiedades );
 
 app.listen(port, () =>{
     console.log(`Servidor corriendo en el puerto ${port}`)
