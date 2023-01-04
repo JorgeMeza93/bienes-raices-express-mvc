@@ -8,7 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./index.js",
     "server": "nodemon index.js",
-    "css": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/styles.css --watch"
+    "css": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/styles.css --watch",
+    "js": "webpack --watch"
   },
   "keywords": [
     "Express",
@@ -36,6 +37,8 @@
     "nodemon": "^2.0.20",
     "postcss": "^8.4.20",
     "postcss-cli": "^10.1.0",
-    "tailwindcss": "^3.2.4"
+    "tailwindcss": "^3.2.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
   }
 }
