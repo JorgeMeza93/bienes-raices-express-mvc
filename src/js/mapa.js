@@ -24,7 +24,11 @@
         geocodeService.reverse().latlng(position, 16).run(function (error, resultado){
             marker.bindPopup(resultado.address.LongLabel);
             //Llenar los campos
-            document.querySelector(".calle").textContent = resultado.address.Address ?? ""
+            document.querySelector(".calle").textContent = resultado?.address?.Address ?? "";
+            document.querySelector("#calle").value = resultado?.address?.Address ?? "";
+            document.querySelector("#lat").value = resultado?.latlng?.Address ?? "";
+            document.querySelector("#lng").value = resultado?.address?.Address ?? "";
+             
         })
     })
 
