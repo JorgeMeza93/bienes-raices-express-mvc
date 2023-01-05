@@ -9,6 +9,9 @@ const categorias = [
         nombre: "Depósito"
     },
     {
+        nombre: "Duplex"
+    },
+    {
         nombre: "Estancia"
     },
     {
