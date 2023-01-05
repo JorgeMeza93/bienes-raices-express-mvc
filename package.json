@@ -9,7 +9,8 @@
     "start": "node ./index.js",
     "server": "nodemon index.js",
     "css": "npx tailwindcss -i ./public/css/tailwind.css -o ./public/css/styles.css --watch",
-    "js": "webpack --watch"
+    "js": "webpack --watch",
+    "db:importar": "node ./seed/seeder.js -i"
   },
   "keywords": [
     "Express",
