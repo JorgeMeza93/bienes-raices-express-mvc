@@ -23,4 +23,8 @@ const crearPropiedad = async (req, res) => {
     })
 }
 
-export { administarPropiedades, crearPropiedad }
+const guardarPropiedad = async (req, res) => {
+
+}
+
+export { administarPropiedades, crearPropiedad, guardarPropiedad }
