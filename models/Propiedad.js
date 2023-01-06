@@ -13,7 +13,7 @@ const Propiedad = db.define("propiedades", {
         allowNull: false
     },
     descripcion: {
-        type: DataTypes.TEXT(1500),
+        type: DataTypes.TEXT,
         allowNull: false
     },
     habitaciones: {

@@ -22,10 +22,14 @@ block contenido
                             label(for="categoria" class="block text-sm uppercase text-gray-500 mb-3 font-bold") Categoría
                             select(class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" name="categoria")#categoria
                                 option(value="") - Seleccione -
+                                each categoria in categorias
+                                    option(value=categoria.id)= categoria.nombre
                         div(class="md:w-1/2")
                             label(for="precio" class="block text-sm uppercase text-gray-500 mb-3 font-bold") Precio
                             select(class="w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400" name="precio")#precio
                                 option(value="") - Seleccione -
+                                each precio in precios
+                                    option(value=precio.id)= precio.nombre
                     div(class="md:flex md:gap-4 space-y-5 md:space-y-0")
                         div(class="md:w-1/2")
                             label(for="habitaciones" class="block text-sm uppercase text-gray-500 mb-3 font-bold") Habitaciones
