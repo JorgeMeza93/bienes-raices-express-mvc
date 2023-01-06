@@ -21,7 +21,8 @@ const crearPropiedad = async (req, res) => {
         barra: true,
         csrfToken: req.csrfToken(),
         categorias,
-        precios
+        precios,
+        datos: {}
     })
 }
 
