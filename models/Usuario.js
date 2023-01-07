@@ -27,6 +27,14 @@ const Usuario = db.define("usuarios", {
             const salt = await bcrypt.genSalt(10);
             usuario.password = await bcrypt.hash(usuario.password, salt);
         }
+    },
+    // Los scopes audan a eliminar ciertos campos cuando haces una consulta de algun modelo para evitar pasar información sensible
+    scopes: {
+        eliminarPassword: {
+            attributes: {
+                exclude: ["password", "token", "confirmado", "createdAt", "updatedAt"]
+            }
+        }
     }
 });
 
