@@ -28,7 +28,7 @@
             document.querySelector("#calle").value = resultado?.address?.Address ?? "";
             document.querySelector("#lat").value = resultado?.latlng?.lat ?? "";
             document.querySelector("#lng").value = resultado?.latlng?.lng ?? "";
-            console.log(resultado)
+            
         })
     })
 
