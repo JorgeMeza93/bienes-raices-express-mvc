@@ -14,7 +14,7 @@ const protegerRuta = async (req, res, next) => {
         console.log(usuarioLogeado);
         //Almacenar el usuario al Req
         if(usuarioLogeado){
-            req.Usuario = usuarioLogeado;
+            req.usuario = usuarioLogeado;
         }
         else{
             return res.redirect("/auth/login")
