@@ -1,5 +1,5 @@
 import express from "express";
-import { administarPropiedades, crearPropiedad, guardarPropiedad } from "../controllers/propiedades-controller.js";
+import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen } from "../controllers/propiedades-controller.js";
 import { body } from "express-validator";
 import protegerRuta from "../middlewares/protegerRuta.js";
 
@@ -17,6 +17,6 @@ router.post("/propiedades/crear", protegerRuta,
     body("banos").isNumeric().withMessage("Selecciona número de baños"),
     body("jardin").isNumeric().withMessage("Selecciona jardín"),
     body("lat").notEmpty().withMessage("Ubica la propiedad en el mapa"),
-    guardarPropiedad)
-
+    guardarPropiedad);
+router.get("/propiedades/agregar-imagen/:id", guardarImagen);
 export default router;

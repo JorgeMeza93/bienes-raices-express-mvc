@@ -70,4 +70,11 @@ const guardarPropiedad = async (req, res) => {
     }
 }
 
-export { administarPropiedades, crearPropiedad, guardarPropiedad }
+const guardarImagen = async (req, res) => {
+    res.render("propiedades/agregar-imagen", {
+        pagina: "Agregar imagen",
+        barra: true
+    });
+}
+
+export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen }
