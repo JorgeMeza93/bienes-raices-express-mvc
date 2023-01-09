@@ -88,6 +88,7 @@ const guardarImagen = async (req, res) => {
     res.render("propiedades/agregar-imagen", {
         pagina: `Subir imagen: ${propiedad.titulo}`,
         barra: true,
+        csrfToken: req.csrfToken(),
         propiedad
     });
 }
