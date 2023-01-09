@@ -93,7 +93,7 @@ const guardarImagen = async (req, res) => {
     });
 }
 
-const almacenarImagen = async (req, res) => {
+const almacenarImagen = async (req, res, next) => {
     const {id} = req.params;
     //Validar que la propiedad exista
     const propiedad = await Propiedad.findByPk(id);
@@ -112,6 +112,7 @@ const almacenarImagen = async (req, res) => {
         propiedad.imagen = req.file.filename
         propiedad.publicado = 1;
         await propiedad.save();
+        next();
     } catch (error) {
         console.log(error);
     }
