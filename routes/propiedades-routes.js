@@ -18,5 +18,5 @@ router.post("/propiedades/crear", protegerRuta,
     body("jardin").isNumeric().withMessage("Selecciona jardín"),
     body("lat").notEmpty().withMessage("Ubica la propiedad en el mapa"),
     guardarPropiedad);
-router.get("/propiedades/agregar-imagen/:id", guardarImagen);
+router.get("/propiedades/agregar-imagen/:id", protegerRuta, guardarImagen);
 export default router;
