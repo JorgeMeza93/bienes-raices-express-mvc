@@ -26,7 +26,7 @@ eval("(function webpackUniversalModuleDefinition(root, factory) {\n\tif(true)\n\
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var dropzone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropzone */ \"./node_modules/dropzone/dist/dropzone.js\");\n\n\n\n\n//# sourceURL=webpack://bienes-raices-node/./src/js/agregarImagen.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var dropzone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dropzone */ \"./node_modules/dropzone/dist/dropzone.js\");\n\n\ndropzone__WEBPACK_IMPORTED_MODULE_0__.Dropzone.options.imagen = {\n    dictDefaultMessage: \"Sube tus imágenes aquí\",\n    acceptedFiles: \".png,.jpg,.jpeg\",\n    maxFilesize: 3,\n    maxFiles: 1,\n    parallelUploads: 1,\n    autoProcessQueue: false\n}\n\n//# sourceURL=webpack://bienes-raices-node/./src/js/agregarImagen.js?");
 
 /***/ })
 

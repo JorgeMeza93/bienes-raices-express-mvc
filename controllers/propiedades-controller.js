@@ -73,7 +73,7 @@ const guardarPropiedad = async (req, res) => {
 const guardarImagen = async (req, res) => {
     //Validar que la propiedad exista
     const { id } = req.params;
-    const propiedad = Propiedad.findByPk(id);
+    const propiedad = await Propiedad.findByPk(id);
     if(!propiedad){
         return res.redirect("/mis-propiedades")
     }
@@ -82,12 +82,13 @@ const guardarImagen = async (req, res) => {
         return res.redirect("/mis-propiedades");
     }
     //Validar que la propiedad no esté publicada
-    if(req.usuario.id.toString() !== propiedad.usuarioId.toString()){
+    if(req.usuario.id.toString() !== propiedad.usuarioId.toString() ){
         return res.redirect("/mis-propiedades")
     }
     res.render("propiedades/agregar-imagen", {
-        pagina: "Agregar imagen",
-        barra: true
+        pagina: `Subir imagen: ${propiedad.titulo}`,
+        barra: true,
+        propiedad
     });
 }
 

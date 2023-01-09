@@ -5,9 +5,9 @@ block contenido
     div(class="py-10")
         h1(class="text-4xl my-10 font-extrabold text-center") BienesRaíces 
             span(class="font-normal") Pipo
-        h2.text-center.text-2xl.font-extrabold Subir Imagen
+        h2.text-center.text-2xl.font-extrabold #{pagina}
         div(class="bg-white shadow py-8 px-4 rounded mx-auto max-w-4xl my-10 md:px-10")
-            form(class="dropzone border-dashed border-2 w-full min:h-96 h-auto rounded flex-col justify-center items-center" method="POST" action="/propiedades/crear" )
+            form(id="imagen" class="dropzone border-dashed border-2 w-full min:h-96 h-auto rounded flex-col justify-center items-center" method="POST" action=`/propiedades/agregar-imagen/${propiedad.id}` )
                 input(type="hidden" name="_csrf" value=csrfToken)
                 
             input(type="submit" class="mt-5 w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded text-white font-bold uppercase cursor-pointer" value="Publicar Propiedad")    
