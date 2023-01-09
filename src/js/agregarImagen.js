@@ -7,12 +7,15 @@ Dropzone.options.imagen = {
     maxFilesize: 3,
     maxFiles: 1,
     parallelUploads: 1,
-    autoProcessQueue: false,
+    autoProcessQueue: true,
     addRemoveLinks: true,
     dictRemoveFile: "Quitar Archivo",
     dictMaxFilesExceeded: "El límite es 1 archivo",
     headers: {
         "CSRF-TOKEN": token
     },
-    paramName: "imagen"
+    paramName: "imagen",
+    init: function(){
+        const botonPublicar = document.querySelector("#publicar");
+    }
 }
