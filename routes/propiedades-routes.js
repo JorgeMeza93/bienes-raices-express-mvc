@@ -1,5 +1,5 @@
 import express from "express";
-import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen } from "../controllers/propiedades-controller.js";
+import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar } from "../controllers/propiedades-controller.js";
 import { body } from "express-validator";
 import protegerRuta from "../middlewares/protegerRuta.js";
 import upload from "../middlewares/subirImagen.js";
@@ -20,5 +20,6 @@ router.post("/propiedades/crear", protegerRuta,
     body("lat").notEmpty().withMessage("Ubica la propiedad en el mapa"),
     guardarPropiedad);
 router.get("/propiedades/agregar-imagen/:id", protegerRuta, guardarImagen);
-router.post("/propiedades/agregar-imagen/:id", protegerRuta, upload.single("imagen"), almacenarImagen )
+router.post("/propiedades/agregar-imagen/:id", protegerRuta, upload.single("imagen"), almacenarImagen ),
+router.get("/propiedades/editar/:id", protegerRuta, editar)
 export default router;

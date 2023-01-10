@@ -126,5 +126,18 @@ const almacenarImagen = async (req, res, next) => {
         console.log(error);
     }
 }
+const editar = async (req, res) => {
+    const [categorias, precios] = await Promise.all([
+        Categoria.findAll(),
+        Precio.findAll()
+    ]);
+    res.render("propiedades/editar", {
+        pagina: "Editar Propiedad",
+        csrfToken: req.csrfToken(),
+        categorias,
+        precios,
+        datos: {}
+    })
+}
 
-export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen }
+export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar }
