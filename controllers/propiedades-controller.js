@@ -7,7 +7,10 @@ import { validationResult } from "express-validator";
 const administarPropiedades = async (req, res) => {
     const { id } = req.usuario;
     const propiedades = await Propiedad.findAll({
-        where: {usuarioId: id}
+        where: {usuarioId: id},
+        include: [
+            {model: Categoria, as: "categoria"}
+        ]
     });
     res.render("propiedades/admin", {
         pagina: "Mis Propiedades",
