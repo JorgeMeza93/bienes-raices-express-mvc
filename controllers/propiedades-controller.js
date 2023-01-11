@@ -146,8 +146,34 @@ const editar = async (req, res) => {
         csrfToken: req.csrfToken(),
         categorias,
         precios,
-        datos: {}
+        datos: propiedad
     })
 }
 
-export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar }
+const guardarCambios = async(req, res) => {
+    let resultado = validationResult(req);
+    if(!resultado.isEmpty()){
+        const [categorias, precios] = await Promise.all([
+            Categoria.findAll(),
+            Precio.findAll()
+        ])
+        return res.render("propiedades/editar", {
+            pagina: "Editar Propiedad",
+            csrfToken: req.csrfToken(),
+            categorias,
+            precios,
+            errores: resultado.array(),
+            datos: req.body
+        })
+    }
+    const { id } = req.params;
+    const propiedad = await Propiedad.findByPk(id);
+    if(!propiedad){
+        return res.redirect("/mis-propiedades");
+    }
+    if(propiedad.usuarioId.toString() !== req.usuarioId.toString()){
+
+    }
+}
+
+export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios }
