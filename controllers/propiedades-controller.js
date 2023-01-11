@@ -2,7 +2,7 @@
 //import Categoria from "../models/Categoria.js";
 import { Precio, Categoria, Propiedad } from "../models/index.js"
 import { validationResult } from "express-validator";
-
+import { unlink } from "node:fs/promises";
 
 const administarPropiedades = async (req, res) => {
     const { id } = req.usuario;
@@ -16,6 +16,7 @@ const administarPropiedades = async (req, res) => {
     res.render("propiedades/admin", {
         pagina: "Mis Propiedades",
         barra: true,
+        csrfToken: req.csrfToken(),
         propiedades
     });
 }
@@ -171,7 +172,7 @@ const guardarCambios = async(req, res) => {
     if(!propiedad){
         return res.redirect("/mis-propiedades");
     }
-    if(propiedad.usuarioId.toString() !== req.usuarioId.toString()){
+    if(propiedad.usuarioId.toString() !== req.usuario.id.toString()){
         return res.redirect("/mis-propiedades");
     }
     try {
@@ -195,5 +196,22 @@ const guardarCambios = async(req, res) => {
         
     }
 }
+const eliminar = async(req, response) => {
+    const { id } = req.params;
+    const propiedad = await Propiedad.findByPk(id);
+    if(!propiedad){
+        return res.redirect("/mis-propiedades");
+    }
+    if(propiedad.usuarioId.toString() !== req.usuario.id.toString()){
+        return res.redirect("/mis-propiedades")
+    }
+    // Eliminar la imagen asociada
+    await unlink(`public/uploads/${propiedad.imagen}`)
+    console.log("Se eliminó la imagen");
+    //Eliminar la propiedad
+    await propiedad.destroy();
+    res.redirect("/mis-propiedades")
+}
 
-export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios }
+
+export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar}
