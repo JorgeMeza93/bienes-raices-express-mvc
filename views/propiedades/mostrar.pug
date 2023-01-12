@@ -1,3 +1,11 @@
 extends ../layout/app
 block contenido
-    
+    div(class="py-5")
+        h1(class="text-4xl my-10 font-extrabold text-center")= propiedad.titulo
+        div
+            a(href="#" class="font-bold text-gray-600 text-sm") Categoría:
+                span(class="font-normal")= propiedad.categoria.nombre
+        div(class="mt-5 md:flex md:gap-4")
+            div(class="md:w-2/3")
+
+            div(class="md:w-1/3")
