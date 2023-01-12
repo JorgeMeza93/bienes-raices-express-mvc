@@ -6,6 +6,25 @@ block contenido
             a(href="#" class="font-bold text-gray-600 text-sm") Categoría:
                 span(class="font-normal")= propiedad.categoria.nombre
         div(class="mt-5 md:flex md:gap-4")
-            div(class="md:w-2/3")
-
+            div(class="md:w-2/3 bg-white shadow rounded-lg")
+                img(src=`/uploads/${propiedad.imagen}` alt=`imagen de la propiedad ${propiedad.titulo}`)
+                div(class="px-5 py-10")
+                    p= propiedad.descripcion
+                    h2(class="text-2xl leading-6 text-gray-900") Información de la Propiedad
+                    div(class="grid grid-cols-1 md:grid-cols-2")
+                        p(class="text-gray-600 font-bold text-xs") Baños
+                            span(class="text-gray-800 block text-lg")= propiedad.banos
+                    div(class="grid grid-cols-1 md:grid-cols-2")
+                        p(class="text-gray-600 font-bold text-xs") Habitaciones
+                            span(class="text-gray-800 block text-lg")= propiedad.habitaciones
+                    div(class="grid grid-cols-1 md:grid-cols-2")
+                        p(class="text-gray-600 font-bold text-xs") Estacionamiento
+                            span(class="text-gray-800 block text-lg")= propiedad.estacionamiento
+                    div(class="grid grid-cols-1 md:grid-cols-2")
+                        p(class="text-gray-600 font-bold text-xs") Jardín
+                            span(class="text-gray-800 block text-lg")= propiedad.jardin
+                    div(class="grid grid-cols-1 md:grid-cols-2")
+                        p(class="text-gray-600 font-bold text-xs") Precio
+                            span(class="text-gray-800 block text-lg")= propiedad.precio.nombre
+                    
             div(class="md:w-1/3")
