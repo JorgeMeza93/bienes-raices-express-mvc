@@ -1,5 +1,5 @@
 import express from "express";
-import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar } from "../controllers/propiedades-controller.js";
+import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad } from "../controllers/propiedades-controller.js";
 import { body } from "express-validator";
 import protegerRuta from "../middlewares/protegerRuta.js";
 import upload from "../middlewares/subirImagen.js";
@@ -34,5 +34,8 @@ router.post("/propiedades/editar/:id", protegerRuta,
     body("lat").notEmpty().withMessage("Ubica la propiedad en el mapa"),
     guardarCambios);
 router.post("/propiedades/eliminar/:id", protegerRuta, eliminar)
+
+// Área Pública
+router.get("/propiedad/:id", mostrarPropiedad)
 
 export default router;
