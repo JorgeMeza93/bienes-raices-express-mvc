@@ -4,6 +4,7 @@ import routerPropiedades from "./routes/propiedades-routes.js";
 import db from "./config/db.js";
 import csurf from "csurf";
 import cookieParser from "cookie-parser";
+import routerApp from "./routes/appRoutes.js"
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -32,6 +33,7 @@ app.set("views", "./views");
 app.use( express.static("public") )
 
 //Routing
+app.use("/", routerApp)
 app.use("/auth", router);
 app.use("/",routerPropiedades );
 
