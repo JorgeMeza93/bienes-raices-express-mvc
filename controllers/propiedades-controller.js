@@ -5,20 +5,45 @@ import { validationResult } from "express-validator";
 import { unlink } from "node:fs/promises";
 
 const administarPropiedades = async (req, res) => {
-    const { id } = req.usuario;
-    const propiedades = await Propiedad.findAll({
-        where: {usuarioId: id},
-        include: [
-            {model: Categoria, as: "categoria"},
-            {model: Precio, as: "precio"}
-        ]
-    });
-    res.render("propiedades/admin", {
-        pagina: "Mis Propiedades",
-        barra: true,
-        csrfToken: req.csrfToken(),
-        propiedades
-    });
+    //Leer query String
+    const { pagina: paginaActual } = req.query;
+    const expresionRegular = /^[0-9]$/
+    if(!expresionRegular.test(paginaActual)){
+        return res.redirect("/mis-propiedades?pagina=1");
+    }
+    try{
+        const limite = 6;
+        const offset = ((paginaActual * limite) - limite)
+        const { id } = req.usuario;
+        const [propiedades, total] = await Promise.all([
+            Propiedad.findAll({
+                limit: limite,
+                offset,
+                where: {usuarioId: id},
+                include: [
+                    {model: Categoria, as: "categoria"},
+                    {model: Precio, as: "precio"}
+                ]
+            }),
+            Propiedad.count({
+                where: {
+                    usuarioId: id
+                }
+            })
+        ])
+        
+        res.render("propiedades/admin", {
+            pagina: "Mis Propiedades",
+            barra: true,
+            csrfToken: req.csrfToken(),
+            propiedades,
+            paginas: Math.ceil(total / limite),
+            paginaActual
+        });
+    }
+    catch (error){
+        console.log(error);
+    }
 }
 
 const crearPropiedad = async (req, res) => {

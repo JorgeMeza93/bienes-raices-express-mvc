@@ -29,5 +29,11 @@ block contenido
                                     form(method="POST" action=`/propiedades/eliminar/:${propiedad.id}`)
                                         input(type="hidden" name="_csrf" value=csrfToken )
                                         input(type="submit" class=`w-full px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-red-100 text-red-800` value="Eliminar")
+                div(class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6")
+                    div
+                        nav(class="relative z-0 inline-flex rounded-md shadow-md")
+                            - var n = 1
+                                while n <= paginas
+                                    a(href=`/mis-propiedades?pagina=${n}` class=`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${paginaActual == n ? "bg-indigo-50 border-indigo-500 text-indigo-600" : "bg-white border-gray-300 text-gray-500 hover:bg-gray-50"}`) #{n++}
         else
             p(class="text-center") No hay Propiedades
