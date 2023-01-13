@@ -38,7 +38,10 @@ const administarPropiedades = async (req, res) => {
             csrfToken: req.csrfToken(),
             propiedades,
             paginas: Math.ceil(total / limite),
-            paginaActual
+            paginaActual,
+            total,
+            offset,
+            limite
         });
     }
     catch (error){
