@@ -7,7 +7,7 @@ import { unlink } from "node:fs/promises";
 const administarPropiedades = async (req, res) => {
     //Leer query String
     const { pagina: paginaActual } = req.query;
-    const expresionRegular = /^[0-9]$/
+    const expresionRegular = /^[1-9]$/
     if(!expresionRegular.test(paginaActual)){
         return res.redirect("/mis-propiedades?pagina=1");
     }
@@ -31,14 +31,13 @@ const administarPropiedades = async (req, res) => {
                 }
             })
         ])
-        
         res.render("propiedades/admin", {
             pagina: "Mis Propiedades",
             barra: true,
             csrfToken: req.csrfToken(),
             propiedades,
             paginas: Math.ceil(total / limite),
-            paginaActual,
+            paginaActual: Number(paginaActual),
             total,
             offset,
             limite

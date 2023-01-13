@@ -30,6 +30,9 @@ block contenido
                                         input(type="hidden" name="_csrf" value=csrfToken )
                                         input(type="submit" class=`w-full px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-red-100 text-red-800` value="Eliminar")
                 div(class="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6")
+                    div(class="flex-1 flex justify-between sm:hidden")
+                        a(href=`/mis-propiedades?pagina=${paginaActual - 1}` class=`${paginaActual == 1  ? "pointer-events-none" : ""} relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50`) Anterior
+                        a(href=`/mis-propiedades?pagina=${paginaActual + 1}` class=`${paginaActual === paginas ? "pointer-events-none" : ""} relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50`) Siguiente
                     div(class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between")
                         p(class="text-sm text-gray-700 gap-2") Mostrando 
                             span(class="font-medium") #{offset + 1} a 
