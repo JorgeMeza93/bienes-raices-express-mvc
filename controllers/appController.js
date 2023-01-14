@@ -1,6 +1,8 @@
 
 const inicio = (req, res) => {
-    return res.send("Ester Ana")
+    return res.render("inicio", {
+        pagina: "Inicio"
+    });
 }
 
 const categoria = (req, res) => {
