@@ -1189,3 +1189,7 @@ video {
     width: 16.666667%;
   }
 }
+
+.leaflet-container a{
+  color: #FFF;
+}
