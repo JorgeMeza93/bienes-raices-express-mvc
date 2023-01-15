@@ -5,6 +5,7 @@ import db from "./config/db.js";
 import csurf from "csurf";
 import cookieParser from "cookie-parser";
 import routerApp from "./routes/appRoutes.js"
+import routerAPI from "./routes/APIroutes.js"
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -36,6 +37,7 @@ app.use( express.static("public") )
 app.use("/", routerApp)
 app.use("/auth", router);
 app.use("/",routerPropiedades );
+app.use("/api", routerAPI);
 
 app.listen(port, () =>{
     console.log(`Servidor corriendo en el puerto ${port}`)
