@@ -19,6 +19,39 @@ block contenido
                     each precio in precios
                         option(value=precio.id)= precio.nombre
         div(id="mapa-inicio" class="h-[600px] mt-5")
+        section(class="py-5")
+            h2(class="text-center text-4xl font-extrabold pt-10") Casas en Venta
+            div(class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-14")
+                each casa in casas
+                    div(class="bg-white shadow rounded-lg")
+                        img(class="object-cover h-72 w-full" src=`/uploads/${casa.imagen}` alt=`imagen casa ${casa.titulo}`)
+                        div(class="p-5 space-y-5")
+                            h3(class="text-2xl font-bold")= casa.titulo
+                            p(class="text-gray-600 text-sm") Habitaciones 
+                                span(class="text-gray-800 font-bold")= casa.habitaciones
+                            p(class="text-gray-600 text-sm") Baños 
+                                span(class="text-gray-800 font-bold")= casa.banos
+                            p(class="text-gray-600 text-sm") Jardín 
+                                span(class="text-gray-800 font-bold") #{casa.jardin == 1 ? "Sí" : "No" }
+                            p(class="text-gray-600 text-sm") Precio 
+                                span(class="text-gray-800 font-bold")= casa.precio.nombre 
+                            a(href=`/propiedad/${casa.id}` class="bg-indigo-600 w-full text-center block font-bold text-white p-2 uppercase rounded") Ver Propiedad
+        section(class="py-5")
+            h2(class="text-center text-4xl font-extrabold pt-10") Apartamentos en Venta
+            div(class="grid grid-cols-1 lg:grid-cols-3 gap-5 mt-14")
+                each apartamento in apartamentos
+                    div(class="bg-white shadow rounded-lg")
+                        img(class="object-cover h-72 w-full" src=`/uploads/${apartamento.imagen}` alt=`imagen casa ${apartamento.titulo}`)
+                        div(class="p-5 space-y-5")
+                            h3(class="text-2xl font-bold")= apartamento.titulo
+                            p(class="text-gray-600 text-sm") Habitaciones 
+                                span(class="text-gray-800 font-bold")= apartamento.habitaciones
+                            p(class="text-gray-600 text-sm") Baños 
+                                span(class="text-gray-800 font-bold")= apartamento.banos
+                            p(class="text-gray-600 text-sm") Precio 
+                                span(class="text-gray-800 font-bold")= apartamento.precio.nombre 
+                            a(href=`/propiedad/${apartamento.id}` class="bg-indigo-600 w-full text-center block font-bold text-white p-2 uppercase rounded") Ver Propiedad
+
 block scripts
     script(src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js")
     script(src="/js/mapaInicio.js")
