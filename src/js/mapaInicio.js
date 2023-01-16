@@ -51,11 +51,14 @@
         })
     }
     const filtrarPropiedades = () => {
-        const resultado = propiedades.filter(filtrarCategoria);
+        const resultado = propiedades.filter(filtrarCategoria).filter(filtrarPrecio);
         console.log(resultado);
     }
     const filtrarCategoria = propiedad => {
         return filtros.categoria ? propiedad.categoriaId == filtros.categoria : propiedad
+    }
+    const filtrarPrecio = propiedad => {
+        return filtros.precio ? propiedad.precioId == filtros.precio : propiedad
     }
 
 
