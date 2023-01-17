@@ -9,14 +9,16 @@ header(class="bg-indigo-600 p-4")
             a(href="") Conozca más
             a(href="" class="bg-indigo-800 py-2 px-10 rounded-lg" ) Cerrar Sesión
 
-div(class="bg-indigo-700 py-5")
+div(class="bg-indigo-700 hidden lg:block py-5")
     div(class="container mx-auto flex justify-between")
-        a(href="/categorias/1" class="text-sm font-bold uppercase text-white") Apartamentos
-        a(href="/categorias/2" class="text-sm font-bold uppercase text-white") Casas
-        a(href="/categorias/3" class="text-sm font-bold uppercase text-white") Dépositos
-        a(href="/categorias/4" class="text-sm font-bold uppercase text-white") Dúplex
-        a(href="/categorias/5" class="text-sm font-bold uppercase text-white") Estancias
-        a(href="/categorias/6" class="text-sm font-bold uppercase text-white") Edificios
-        a(href="/categorias/7" class="text-sm font-bold uppercase text-white") Locales Comerciales
-        a(href="/categorias/8" class="text-sm font-bold uppercase text-white") Oficinas
-        a(href="/categorias/9" class="text-sm font-bold uppercase text-white") Terrenos
+        nav(class="flex gap-4")
+            a(href="/categorias/1" class="text-sm font-bold uppercase text-white") Apartamentos
+            a(href="/categorias/2" class="text-sm font-bold uppercase text-white") Casas
+            a(href="/categorias/3" class="text-sm font-bold uppercase text-white") Dépositos
+            a(href="/categorias/4" class="text-sm font-bold uppercase text-white") Dúplex
+            a(href="/categorias/5" class="text-sm font-bold uppercase text-white") Estancias
+            a(href="/categorias/6" class="text-sm font-bold uppercase text-white") Edificios
+            a(href="/categorias/7" class="text-sm font-bold uppercase text-white") Locales Comerciales
+            a(href="/categorias/8" class="text-sm font-bold uppercase text-white") Oficinas
+            a(href="/categorias/9" class="text-sm font-bold uppercase text-white") Terrenos
+        form(action="/buscador" method="POST" class="flex gap-3 items-center")

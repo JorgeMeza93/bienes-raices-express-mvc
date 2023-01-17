@@ -45,7 +45,7 @@ const categoria = async (req, res) => {
     const { id } = req.params;
     const categoria = await Categoria.findByPk(id)
     if( !categoria ){
-        return res.render("/404")
+        return res.redirect("/404")
     }
     // Obtener las propiedades de categoria
     const propiedades = await Propiedad.findAll({
@@ -63,7 +63,9 @@ const categoria = async (req, res) => {
 }
 
 const notFound404 = (req, res) => {
-
+    res.render("404", {
+        pagina: "404 No Encontrada"
+    })
 }
 
 const buscador = (req, res) => {
