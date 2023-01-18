@@ -296,5 +296,9 @@ const enviarMensaje = async (req, res) => {
 
     res.redirect("/")
 }
+const verMensajes = async (req, res) => {
+    
+}
 
-export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje }
+
+export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje, verMensajes }

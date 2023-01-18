@@ -1,5 +1,5 @@
 import express from "express";
-import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje } from "../controllers/propiedades-controller.js";
+import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje, verMensajes } from "../controllers/propiedades-controller.js";
 import { body } from "express-validator";
 import protegerRuta from "../middlewares/protegerRuta.js";
 import upload from "../middlewares/subirImagen.js";
@@ -39,7 +39,8 @@ router.post("/propiedades/eliminar/:id", protegerRuta, eliminar)
 // Área Pública
 router.get("/propiedad/:id", identificarUsuario, mostrarPropiedad)
 // Almacenar los mensajes de Propiedad
-router.post("/propiedad/:id", identificarUsuario, body("mensaje").isLength({ min:10 }).withMessage("El Mensaje no puede ir vacío o es muy corto"), enviarMensaje)
+router.post("/propiedad/:id", identificarUsuario, body("mensaje").isLength({ min:10 }).withMessage("El Mensaje no puede ir vacío o es muy corto"), enviarMensaje),
 
+router.get("/mensajes/:id", protegerRuta, verMensajes)
 
 export default router;
