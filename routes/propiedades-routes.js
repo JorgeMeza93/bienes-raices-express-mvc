@@ -3,6 +3,7 @@ import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen,
 import { body } from "express-validator";
 import protegerRuta from "../middlewares/protegerRuta.js";
 import upload from "../middlewares/subirImagen.js";
+import identificarUsuario from "../middlewares/identificarUsuario.js"
 
 const router = express.Router();
 
@@ -36,6 +37,6 @@ router.post("/propiedades/editar/:id", protegerRuta,
 router.post("/propiedades/eliminar/:id", protegerRuta, eliminar)
 
 // Área Pública
-router.get("/propiedad/:id", mostrarPropiedad)
+router.get("/propiedad/:id", identificarUsuario, mostrarPropiedad)
 
 export default router;
