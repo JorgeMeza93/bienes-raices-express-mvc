@@ -1,6 +1,6 @@
 //import Precio from "../models/Precio.js";
 //import Categoria from "../models/Categoria.js";
-import { Precio, Categoria, Propiedad } from "../models/index.js"
+import { Precio, Categoria, Propiedad, Mensaje } from "../models/index.js"
 import { validationResult } from "express-validator";
 import { unlink } from "node:fs/promises";
 import { esVendedor } from "../helpers/index.js";
@@ -243,7 +243,6 @@ const eliminar = async(req, response) => {
 
 const mostrarPropiedad = async (req, res) => {
     const { id } = req.params;
-    console.log(req.usuario);
     const propiedad = await Propiedad.findByPk(id, {
         include: [
             {model: Precio, as: "precio"},
@@ -262,5 +261,40 @@ const mostrarPropiedad = async (req, res) => {
         esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId)
     })
 }
+const enviarMensaje = async (req, res) => {
+    const { id } = req.params;
+    const propiedad = await Propiedad.findByPk(id, {
+        include: [
+            {model: Precio, as: "precio"},
+            {model: Categoria, as: "categoria"}
+        ]
+    });
+    if( !propiedad ){
+        return res.redirect("404")
+    }
+    //Renderizar los errores
+    let resultado = validationResult(req);
+    if( !resultado.isEmpty() ){
+        return res.render("propiedades/mostrar", {
+            propiedad,
+            pagina: propiedad.titulo,
+            csrfToken: req.csrfToken(),
+            usuario: req.usuario,
+            esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+            errores: resultado.array()
+        })
+    }
+    const { mensaje } = req.body
+    const { id: propiedadId } = req.params;
+    const { id: usuarioId } = req.usuario;
+    // Almacenar el mensaje
+    await Mensaje.create({
+        mensaje,
+        propiedadId,
+        usuarioId
+    })
 
-export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad}
+    res.redirect("/")
+}
+
+export { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje }
