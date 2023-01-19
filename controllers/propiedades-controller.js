@@ -23,7 +23,8 @@ const administarPropiedades = async (req, res) => {
                 where: {usuarioId: id},
                 include: [
                     {model: Categoria, as: "categoria"},
-                    {model: Precio, as: "precio"}
+                    {model: Precio, as: "precio"},
+                    {model: Mensaje, as: "mensajes"}
                 ]
             }),
             Propiedad.count({
@@ -297,7 +298,23 @@ const enviarMensaje = async (req, res) => {
     res.redirect("/")
 }
 const verMensajes = async (req, res) => {
-    
+    const { id } = req.params;
+    const propiedad = await Propiedad.findByPk(id, {
+        include: [
+            {model: Mensaje, as: "mensajes"}
+        ]
+    });
+    if(!propiedad){
+        return res.redirect("/mis-propiedades");
+    }
+    if(propiedad.usuarioId.toString() !== req.usuario.id.toString()){
+        return res.redirect("/mis-propiedades");
+    }
+    res.render("propiedades/mensajes", {
+        pagina: "Mensajes",
+        barra: true,
+        mensajes: propiedad.mensajes
+    })
 }
 
 
