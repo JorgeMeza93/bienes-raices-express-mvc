@@ -7,11 +7,13 @@ block contenido
             ul
                 each mensaje in mensajes
                     li(class="border-gray-200 border-b p-5")
-                        p(class="font-bold text-gray-800") Nombre:
-                            span(class="font-normal")= mensaje.usuarioId
-                        p(class="font-bold text-gray-800") Mensaje:
+                        p(class="font-bold text-gray-800") Nombre: 
+                            span(class="font-normal")= mensaje.usuario.nombre
+                        p(class="font-bold text-gray-800") Email: 
+                            span(class="font-normal")= mensaje.usuario.email
+                        p(class="font-bold text-gray-800") Mensaje: 
                             span(class="font-normal")= mensaje.mensaje
-                        p(class="font-bold text-gray-800") Enviado:
+                        p(class="font-bold text-gray-800") Enviado: 
                             span(class="font-normal")= mensaje.createdAt
         else
             p(class="text-center text-gray-600 p-5") No hay mensajes

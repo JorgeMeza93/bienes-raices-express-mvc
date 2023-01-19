@@ -1,6 +1,6 @@
 //import Precio from "../models/Precio.js";
 //import Categoria from "../models/Categoria.js";
-import { Precio, Categoria, Propiedad, Mensaje } from "../models/index.js"
+import { Precio, Categoria, Propiedad, Mensaje, Usuario } from "../models/index.js"
 import { validationResult } from "express-validator";
 import { unlink } from "node:fs/promises";
 import { esVendedor } from "../helpers/index.js";
@@ -301,7 +301,7 @@ const verMensajes = async (req, res) => {
     const { id } = req.params;
     const propiedad = await Propiedad.findByPk(id, {
         include: [
-            {model: Mensaje, as: "mensajes"}
+            {model: Mensaje, as: "mensajes", include: [{ model: Usuario.scope("eliminarPassword") , as: "usuario" }] }
         ]
     });
     if(!propiedad){
