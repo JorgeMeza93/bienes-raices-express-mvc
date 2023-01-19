@@ -3,7 +3,7 @@
 import { Precio, Categoria, Propiedad, Mensaje, Usuario } from "../models/index.js"
 import { validationResult } from "express-validator";
 import { unlink } from "node:fs/promises";
-import { esVendedor } from "../helpers/index.js";
+import { esVendedor, formatearFecha } from "../helpers/index.js";
 
 const administarPropiedades = async (req, res) => {
     //Leer query String
@@ -313,7 +313,8 @@ const verMensajes = async (req, res) => {
     res.render("propiedades/mensajes", {
         pagina: "Mensajes",
         barra: true,
-        mensajes: propiedad.mensajes
+        mensajes: propiedad.mensajes,
+        formatearFecha
     })
 }
 
