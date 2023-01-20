@@ -6,4 +6,6 @@ header(class="bg-indigo-600 p-4")
         nav(class="my-5 text-sm md:flex md:items-center md:gap-3 font-bold text-white hidden")
             a(href="") Mis Propiedades
             a(href="") Mi Perfil
-            a(href="" class="bg-indigo-800 py-2 px-10 rounded-lg" ) Cerrar Sesión
+            form(action="/auth/cerrar-sesion" method="POST")
+                input(type="hidden" name="_csrf" value=csrfToken)
+                input(type="submit" class="bg-indigo-800 py-2 px-10 rounded-lg" value="Cerrar Sesión")

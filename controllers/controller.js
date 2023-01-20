@@ -218,7 +218,8 @@ const nuevoPassword = async (req, res) => {
         mensaje: "El password se ha guardado correctamente"
     })
 }
+const cerrarSesion = (req, res) => {
+    return res.clearCookie("_token").status(200).redirect("/auth/login");
+}
 
-
-
-export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario, confirmar, resetPassword, comprobarToken, nuevoPassword, autenticarLogin }
+export { formularioLogin, formularioRegistro, formularioOlvidePassword, registrarUsuario, confirmar, resetPassword, comprobarToken, nuevoPassword, autenticarLogin, cerrarSesion }
