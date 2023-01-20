@@ -1,5 +1,5 @@
 import express from "express";
-import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje, verMensajes } from "../controllers/propiedades-controller.js";
+import { administarPropiedades, crearPropiedad, guardarPropiedad, guardarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad, enviarMensaje, verMensajes, cambiarEstado } from "../controllers/propiedades-controller.js";
 import { body } from "express-validator";
 import protegerRuta from "../middlewares/protegerRuta.js";
 import upload from "../middlewares/subirImagen.js";
@@ -34,8 +34,8 @@ router.post("/propiedades/editar/:id", protegerRuta,
     body("jardin").isNumeric().withMessage("Selecciona jardín"),
     body("lat").notEmpty().withMessage("Ubica la propiedad en el mapa"),
     guardarCambios);
-router.post("/propiedades/eliminar/:id", protegerRuta, eliminar)
-
+router.post("/propiedades/eliminar/:id", protegerRuta, eliminar);
+router.put("/propiedades/:id", protegerRuta, cambiarEstado);
 // Área Pública
 router.get("/propiedad/:id", identificarUsuario, mostrarPropiedad)
 // Almacenar los mensajes de Propiedad
