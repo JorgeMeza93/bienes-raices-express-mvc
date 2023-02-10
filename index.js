@@ -16,7 +16,7 @@ try {
     db.sync();
     console.log("Conexion exitosa a la base de datos");
 } catch (error) {
-    
+    console.log(error);
 }
 
 //Habilitar lectura de datos desde el request
@@ -31,12 +31,12 @@ app.set("view engine", "pug");
 app.set("views", "./views");
 
 //Carpeta publica
-app.use( express.static("public") )
+app.use( express.static("public"))
 
 //Routing
 app.use("/", routerApp)
 app.use("/auth", router);
-app.use("/",routerPropiedades );
+app.use("/",routerPropiedades );ß
 app.use("/api", routerAPI);
 
 app.listen(port, () =>{
