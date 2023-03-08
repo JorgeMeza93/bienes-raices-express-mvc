@@ -36,7 +36,7 @@ app.use( express.static("public"))
 //Routing
 app.use("/", routerApp)
 app.use("/auth", router);
-app.use("/",routerPropiedades );ß
+app.use("/", routerPropiedades);
 app.use("/api", routerAPI);
 
 app.listen(port, () =>{
